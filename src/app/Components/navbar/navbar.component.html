@@ -1,7 +1,7 @@
 <nav class="nav-bar">
-    <a href="#">Home</a>
-    <a href="#">Add Expense</a>
-    <a href="#">View Expenses</a>
-    <a href="#" class="login-btn">Login</a>
-  </nav>
+    <a [routerLink]="['']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <button (click)="addExpense()" [routerLinkActive]="'active'">Add Expense</button>
+    <a >View Expenses</a>
+    <a routerLink="Login" [routerLinkActive]="'active'" class="login-btn">Login</a>
+</nav>
   

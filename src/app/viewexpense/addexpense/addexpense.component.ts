@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms'
+import { FormsModule, NgForm} from '@angular/forms'
+import { EventEmitter } from 'stream';
+import { Expense } from '../../Model/expense';
 @Component({
   selector: 'app-addexpense',
   imports: [CommonModule, FormsModule],
   templateUrl: './addexpense.component.html',
   styleUrl: './addexpense.component.css'
 })
-export class AddexpenseComponent {
+export class AddexpenseComponent{
 
   expense = {
     title: '',
@@ -16,16 +18,16 @@ export class AddexpenseComponent {
     date: ''
   };
 
-  onSubmit(form: any) {
+  @Output()
+  SubmitForm:EventEmitter<any> =new EventEmitter<any>();
+
+  onSubmit(form: NgForm) {
     if (form.valid) {
+      this.SubmitForm.emit(form.value);
       console.log("Expense Added:", this.expense);
       form.reset();
     }
   }
-
-
-
-
 
   // expense = {
   //   title: '',
