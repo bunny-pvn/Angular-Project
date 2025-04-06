@@ -1,0 +1,8 @@
+{
+  "routes": {
+    "/Angular-Project": {},
+    "/Angular-Project/AddExpense": {},
+    "/Angular-Project/login": {},
+    "/Angular-Project/viewexpense": {}
+  }
+}
