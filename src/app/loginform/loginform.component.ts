@@ -1,12 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
+import { AuthService } from './../Services/auth.service';
+import { Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-loginform',
-  imports: [CommonModule, FormsModule],
+  imports:[CommonModule,FormsModule],
   templateUrl: './loginform.component.html',
-  styleUrl: './loginform.component.css'
+  styleUrls: ['./loginform.component.css']
 })
 export class LoginformComponent {
 
@@ -15,9 +18,22 @@ export class LoginformComponent {
     password: ''
   };
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit(form: any) {
     if (form.valid) {
-      console.log("Login successful", this.credentials);
+      const success = this.authService.login(
+        this.credentials.username,
+        this.credentials.password
+      );
+
+      if (success) {
+        console.log('Login successful');
+        this.router.navigate(['/']); // Redirect to home
+      } else {
+        alert('Invalid username or password!');
+      }
+
       form.reset();
     }
   }
